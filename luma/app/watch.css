@@ -1,0 +1,116 @@
+/* Theater layout shares the browsing surface's charcoal, warm accent and typography. */
+.watch-app{background:#090909;color:#f5f5f1;--bg:#090909;--panel:#191919;--line:#ffffff14;--muted:#a9a6a0}
+.watch-app .watch-header{height:80px;min-height:64px;padding:0 3.5%;border:0;gap:24px;background:linear-gradient(#141414,#090909);z-index:30}
+.watch-app .watch-header>button:first-child{border:1px solid #ffffff20;border-radius:50px;padding:0 18px;gap:10px;color:#eee;font-size:12px;background:#ffffff05}
+.watch-app .watch-header>button:first-child:hover{border-color:#f2916480;background:#f2916410}
+.watch-app .watch-header .eyebrow{color:#f29164;letter-spacing:2px;font-size:9px;font-weight:800}
+.watch-app .watch-header h1{font-size:21px;font-weight:600;letter-spacing:-.5px;margin-top:7px;line-height:1.2}
+.watch-app .language-toggle{border:1px solid #ffffff20;border-radius:50%;width:44px;height:44px;font-size:12px;color:#d7d1c8}
+.watch-app .theater-player{position:relative;display:block;flex:1;min-height:0;padding:0 3.5% 14px;isolation:isolate}
+.watch-app .theater-player .player-stack{height:100%;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) 68px;gap:0}
+.watch-app .theater-player .video-shell{min-height:0;border:1px solid #ffffff0c;border-radius:10px;box-shadow:0 20px 80px #0008;background:#000;overflow:hidden}
+.watch-app .theater-player .video-shell:fullscreen,.watch-app .theater-player .video-shell.is-expanded{border:0;border-radius:0;box-shadow:none}
+.watch-app .theater-player .player-cover>img{object-fit:cover;object-position:center 30%;opacity:.55;filter:blur(3px);transform:scale(1.025)}
+.watch-app .theater-player .cover-gradient{background:linear-gradient(0deg,#080808fa,transparent 80%)}
+.watch-app .theater-player .big-play{width:80px;height:80px;background:#f5f5f1;color:#111;box-shadow:0 10px 50px #0008;border:0}
+.watch-app .theater-player .big-play:hover{background:#f29164;transform:translate(-50%,-50%) scale(1.05)}
+.watch-app .theater-player .player-cover>strong{font-family:inherit;font-size:clamp(23px,4vw,50px);font-weight:700;letter-spacing:-1px;bottom:12%;max-width:75%;line-height:1.15;text-align:center}
+.watch-app .theater-player .fullscreen-button{top:16px;inset-inline-end:16px;background:#151515d9;border:1px solid #ffffff30;border-radius:50%;color:#eee}
+.watch-app .theater-player .fullscreen-button:hover{background:#333}
+.watch-app .theater-player .player-toolbar{position:relative;z-index:12;height:68px;gap:15px;background:#090909;padding:0;border:0;overflow:visible}
+.viewer-playback-meta{min-width:0;display:flex!important;flex-direction:column;align-items:flex-start!important;gap:5px!important;overflow:hidden}
+.watch-app .viewer-playback-meta .playback-status{font-size:12px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#c5c0b7;line-height:1.3}
+.watch-app .viewer-playback-meta .playback-status.connected{color:#e2dacd}
+.viewer-playback-meta>small{font-size:10px;letter-spacing:1px;color:#77746f;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:100%}
+.viewer-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.watch-app .viewer-tool{height:44px;min-width:44px;padding:0 12px;gap:8px;border-radius:7px;color:#c9c5be;border:1px solid transparent;white-space:nowrap}
+.watch-app .viewer-tool>span{font-size:12px;font-weight:500}
+.watch-app .viewer-tool>small{display:inline-flex;align-items:center;justify-content:center;font-size:10px;min-width:18px;height:18px;border:1px solid #ffffff30;border-radius:3px;color:#f29164}
+.watch-app .viewer-tool:hover{color:#fff;background:#ffffff0b}
+.watch-app .viewer-tool[aria-expanded=true]{color:#f29164;background:#f2916412;border-color:#f2916430}
+.watch-app .viewer-panel-shade{position:absolute;inset:0 0 82px;z-index:15;width:100%;height:auto;min-height:0;border-radius:0;background:linear-gradient(90deg,#0004,#0009);cursor:default}
+.watch-app.rtl .viewer-panel-shade{background:linear-gradient(270deg,#0004,#0009)}
+.watch-app .theater-player .watch-sidebar{position:absolute;z-index:20;display:none;inset-inline-end:3.5%;top:12px;bottom:90px;width:380px;max-width:calc(100% - 7%);max-height:600px;grid-template-rows:62px 46px minmax(0,1fr);gap:0;background:#191919fa;border:1px solid #ffffff24;border-radius:12px;box-shadow:0 18px 70px #000b;backdrop-filter:blur(20px);overflow:hidden}
+.watch-app .theater-player.viewer-panel-open .watch-sidebar{display:grid}
+.viewer-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 20px;border-bottom:1px solid #ffffff0c}
+.viewer-panel-heading>div{display:flex;align-items:center;gap:12px;min-width:0}
+.viewer-panel-heading span{font-size:10px;color:#f29164;letter-spacing:1.2px;font-weight:900;direction:ltr}
+.viewer-panel-heading h2{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-panel-heading>button{border-radius:50%;color:#aaa}
+.watch-app .theater-player .watch-tabs{height:46px;min-height:0;border-bottom:1px solid #ffffff10;background:#ffffff03;overflow:hidden}
+.watch-app .theater-player .watch-tabs button{font-size:11px;min-height:44px;border-radius:0;color:#a19d97}
+.watch-app .theater-player .watch-tabs button[aria-selected=true]{color:#f29164;border-bottom-color:#f29164;background:#f2916408}
+.watch-app .theater-player .watch-panel-body{padding:16px 18px;gap:10px;min-height:0;overflow:hidden;background:transparent}
+.watch-app .theater-player .watch-panel-body p{color:#c1bcb5}
+.watch-app .theater-player .watch-panel-body select,.watch-app .theater-player .watch-panel-body input{background:#101010;border-color:#ffffff24;border-radius:6px;color:#eee}
+.watch-app .theater-player .source-option{border:1px solid #ffffff13;border-radius:7px;background:#ffffff03;min-height:54px;padding:8px 12px;gap:10px}
+.watch-app .theater-player .source-option[aria-pressed=true]{border-color:#f2916470;background:#f291640a}
+.watch-app .theater-player .source-option strong{font-size:12px;font-weight:600}
+.watch-app .theater-player .source-option small{font-size:10px;line-height:1.4;color:#a09a92}
+.watch-app .theater-player .panel-action{border-color:#ffffff25;border-radius:6px;font-size:11px;background:#ffffff04}
+.watch-app .theater-player .short-modebar{display:none!important}
+.watch-app .theater-player .luma-captions{font-family:Arial,"Segoe UI",sans-serif;background:#000b;border-radius:4px;bottom:14%;font-size:clamp(18px,2vw,28px);padding:6px 12px;line-height:1.45;max-width:80%;left:10%;right:10%;text-shadow:0 2px 5px #000}
+@media(max-width:1100px){.watch-app .viewer-tool>span{display:none}.watch-app .viewer-tool{padding:0 10px}.watch-app .watch-header{height:72px}.watch-app .watch-header h1{font-size:18px}}
+@media(max-width:699px){
+ .watch-app .watch-header{height:66px;min-height:58px;padding:0 16px;gap:13px}.watch-app .watch-header>button:first-child{min-width:44px;width:44px;padding:0}.watch-app .watch-header>button:first-child>span{display:none}.watch-app .watch-header h1{font-size:16px;letter-spacing:-.25px;margin-top:5px}.watch-app .watch-header .eyebrow{font-size:8px;letter-spacing:1.3px}
+ .watch-app .theater-player{padding:0 10px 6px;display:block}.watch-app .theater-player .player-stack{display:grid;grid-template-rows:minmax(0,1fr) 64px;height:100%}.watch-app .theater-player .video-shell{border-radius:7px}.watch-app .theater-player .fullscreen-button{top:10px;inset-inline-end:10px}
+ .watch-app .theater-player .player-toolbar{height:64px;gap:5px}.watch-app .viewer-playback-meta .playback-status{font-size:10px}.viewer-playback-meta>small{font-size:9px;letter-spacing:.3px}.viewer-tools{gap:0}.watch-app .viewer-tool{padding:0 8px;min-width:44px}.watch-app .viewer-tool>small{font-size:9px;min-width:16px;height:16px}.watch-app .viewer-tool>span{display:none}.watch-app .viewer-tool.subtitle-badge{gap:4px}.watch-app .viewer-retry{display:inline-flex}
+ .watch-app .theater-player .watch-sidebar{top:auto;bottom:78px;inset-inline:10px;width:auto;max-width:none;height:min(66%,500px);max-height:calc(100% - 90px);grid-template-rows:54px 44px minmax(0,1fr);border-radius:12px}.watch-app .viewer-panel-shade{bottom:70px}.viewer-panel-heading{padding:5px 8px 5px 16px}.viewer-panel-heading h2{font-size:15px}.watch-app .theater-player .watch-panel-body{padding:12px 14px;gap:8px}.watch-app .theater-player .watch-tabs{height:44px}.watch-app .theater-player .luma-captions{font-size:17px;max-width:90%;left:5%;right:5%}.watch-app .theater-player .big-play{width:64px;height:64px}
+}
+@media(max-height:520px){
+ .watch-app .watch-header{height:56px;min-height:50px}.watch-app .watch-header h1{font-size:15px;margin-top:4px}.watch-app .watch-header .eyebrow{font-size:8px}.watch-app .theater-player{padding-bottom:4px}.watch-app .theater-player .player-stack{grid-template-rows:minmax(0,1fr) 54px}.watch-app .theater-player .player-toolbar{height:54px}.watch-app .theater-player .watch-sidebar{top:0;bottom:62px;width:360px;max-height:none;grid-template-rows:44px 44px minmax(0,1fr)}.viewer-panel-heading{padding-block:0}.watch-app .theater-player .watch-panel-body{padding:8px 12px;gap:5px}.watch-app .viewer-panel-shade{bottom:58px}.watch-app .viewer-tool>span{display:none}.watch-app .theater-player .fullscreen-button{top:8px;inset-inline-end:8px}
+}
+@media(max-height:520px) and (max-width:699px){.watch-app .theater-player .watch-sidebar{inset-inline:10px;top:0;bottom:62px;width:auto;height:auto;max-height:none;grid-template-rows:44px 44px minmax(0,1fr)}}
+html[data-keyboard=true] .watch-app .theater-player .watch-sidebar{top:0;bottom:0;height:auto;max-height:none;display:none}
+html[data-keyboard=true] .watch-app .theater-player.viewer-panel-open .watch-sidebar{display:grid}
+html[data-keyboard=true] .watch-app .theater-player .player-stack{display:none}
+@media(prefers-reduced-motion:no-preference){.viewer-panel-open .watch-sidebar{animation:viewer-panel-in .18s ease-out}@keyframes viewer-panel-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
+
+@media(max-height:650px) and (max-width:699px){.watch-app .theater-player .watch-sidebar{top:0;bottom:72px;height:auto;max-height:none}}
+@media(max-height:520px){.watch-app .theater-player .watch-sidebar{grid-template-rows:44px 44px minmax(0,1fr)}}
+
+
+.watch-app .watch-screen{overflow:hidden}.watch-app .theater-player .hidden-file{top:0;inset-inline-start:0;width:1px;height:1px;min-height:0;min-width:0;padding:0;border:0;pointer-events:none}
+
+
+.watch-app .theater-player .watch-panel-body{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#64574f #191919;scroll-padding:14px}.watch-app .watch-panel-body>*{flex-shrink:0}.viewer-settings-section,.viewer-license{display:flex;flex-direction:column;gap:12px;border-top:1px solid #ffffff16;padding-top:18px;margin-top:6px}.viewer-detail-title{font-size:20px;font-weight:600;letter-spacing:-.4px;line-height:1.3}.viewer-file-name{font-size:11px;overflow-wrap:anywhere;color:#b4ada3}.episode-panel{display:flex;flex-direction:column;gap:18px}.episode-panel .field{display:flex;flex-direction:column;align-items:stretch;gap:10px}.episode-panel select,.episode-panel input{width:100%;min-height:44px}.episode-panel .episode-name{margin:0;font-size:14px;line-height:1.6}.watch-app .watch-panel-body .synopsis{display:block;overflow:visible;-webkit-line-clamp:unset;line-height:1.8}
+
+/* Shared browsing palette, with compact settings rows instead of boxed cards. */
+.watch-app .theater-player .watch-sidebar{width:410px;background:#141414f5;border-color:#ffffff17;border-radius:10px;grid-template-rows:64px 60px minmax(0,1fr)}
+.watch-app .viewer-panel-heading{padding-inline:22px 12px;border-bottom:0}
+.viewer-panel-heading>div>span{font-size:10px;color:#f29164;letter-spacing:2px;font-weight:800}
+.watch-app .viewer-panel-heading h2{font-size:20px;letter-spacing:-.5px}
+.watch-app .theater-player .watch-tabs{height:60px;padding-inline:10px;background:transparent;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;overflow:visible}
+.watch-app .theater-player .watch-tabs button{display:flex;flex-direction:column;justify-content:center;gap:5px;font-size:11px;padding:5px 4px;min-width:0;color:#aaa;letter-spacing:0}
+.viewer-tab-icon{display:flex;align-items:center;justify-content:center}
+.watch-app .theater-player .watch-tabs button[aria-selected=true]{background:transparent;color:#f29164;border-bottom:2px solid #f29164}
+.watch-app .theater-player .watch-panel-body{padding:10px 20px 20px;gap:0;scrollbar-color:#555 #141414}
+.watch-app .theater-player .source-option{min-height:60px;padding:12px 4px;border:0;border-bottom:1px solid #ffffff0d;border-radius:0;background:transparent;gap:13px;text-align:start}
+.watch-app .theater-player .source-option:hover:not(:disabled){background:#ffffff05}
+.watch-app .theater-player .source-option[aria-pressed=true]{background:transparent;border-color:#ffffff0d;color:#f29164}
+.watch-app .theater-player .source-option[aria-pressed=true] strong{color:#f29164}
+.watch-app .theater-player .source-option strong{font-size:14px;font-weight:500;color:#e7e5e1}
+.watch-app .theater-player .source-option small{font-size:11px;color:#8e8a84;line-height:1.5;margin-top:3px}
+.watch-app .theater-player .source-option:disabled{opacity:.55}
+.viewer-menu-intro{padding:20px 0 6px}
+.viewer-menu-intro>span{font-size:9px;font-weight:700;letter-spacing:1.8px;color:#8e8a84}
+.watch-app .viewer-menu-intro p{font-size:11px;line-height:1.6;margin:6px 0;color:#777}
+.watch-app .theater-player .watch-panel-body>.field,.watch-app .theater-player .caption-status{margin-block:14px}
+.watch-app .theater-player .panel-action{min-height:44px;background:transparent;border:0;justify-content:flex-start;padding-inline:0;color:#ddd}
+.watch-app .theater-player .panel-action:hover{color:#f29164}
+.watch-app .theater-player .watch-panel-body select,.watch-app .theater-player .watch-panel-body input{min-height:44px;background:#202020;border-color:#ffffff1a;border-radius:4px;font-size:13px}
+.watch-app .viewer-settings-section{padding-top:18px;margin-top:16px;gap:10px}
+.watch-app .viewer-tool:focus-visible,.watch-app .watch-tabs button:focus-visible,.watch-app .source-option:focus-visible{outline:2px solid #f29164;outline-offset:-2px}
+@media(max-width:699px){
+ .watch-app .theater-player .watch-sidebar{inset-inline:8px;width:auto;border-radius:12px 12px 8px 8px;grid-template-rows:54px 58px minmax(0,1fr)}
+ .watch-app .theater-player .watch-tabs{height:58px}.watch-app .theater-player .watch-panel-body{padding:6px 16px 18px}
+ .watch-app .viewer-panel-heading{padding-inline:18px 10px}.watch-app .viewer-panel-heading h2{font-size:18px}
+ .watch-app .viewer-tool{padding-inline:5px;min-width:44px}.watch-app .viewer-playback-meta{flex:1}
+ .watch-app .viewer-retry{display:inline-flex}
+}
+@media(max-height:520px){
+ .watch-app .theater-player .watch-sidebar{grid-template-rows:44px 48px minmax(0,1fr)}
+ .watch-app .theater-player .watch-tabs{height:48px}.watch-app .theater-player .watch-tabs button{flex-direction:row;gap:5px;font-size:10px}
+ .watch-app .viewer-panel-heading h2{font-size:16px}.watch-app .theater-player .source-option{min-height:56px;padding-block:9px}
+}
+@media(max-width:359px){.watch-app .viewer-playback-meta{max-width:60px}.watch-app .viewer-tool{padding-inline:3px}}

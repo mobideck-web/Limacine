@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {stripTypeScriptTypes} from 'node:module';
+const modules=new Map();
+function source(name){if(modules.has(name))return modules.get(name);let code=name.endsWith('.json')?'export default '+fs.readFileSync(new URL('../lib/'+name,import.meta.url),'utf8'):stripTypeScriptTypes(fs.readFileSync(new URL('../lib/'+name+'.ts',import.meta.url),'utf8'));code=code.replace(/from ['"]\.\/([^'"]+)['"]/g,(_,path)=>'from '+JSON.stringify(source(path)));const url='data:text/javascript;base64,'+Buffer.from(code).toString('base64');modules.set(name,url);return url;}
+const y=await import(source('youtube-live'));
+const ids=['DW000000001','AJ000000001','MO000000001','BL000000001'];
+const titles=['Water documentary','Arabic nature documentary','Feature film','Spring - Blender Open Movie'];
+const details=i=>({playabilityStatus:{status:'OK',playableInEmbed:true},videoDetails:{videoId:ids[i],channelId:y.youtubeChannels[i].id,title:titles[i],lengthSeconds:i===2?'5400':i===3?'400':'2700',shortDescription:'Official publisher synopsis'},microformat:{playerMicroformatRenderer:{publishDate:'2026-10-24'}}});
+const data=i=>({contents:[{lockupViewModel:{contentId:ids[i],metadata:{lockupMetadataViewModel:{title:{content:titles[i]}}},contentImage:{thumbnailViewModel:{overlays:[{thumbnailBottomOverlayViewModel:{badges:[{thumbnailBadgeViewModel:{text:i===2?'1:30:00':i===3?'6:40':'45:00'}}]}}]}}}}]});
+assert.equal(y.channelCandidates(data(0),y.youtubeChannels[0]).length,1);
+const trailer=data(0);trailer.contents[0].lockupViewModel.metadata.lockupMetadataViewModel.title.content='Trailer - full film';assert.equal(y.channelCandidates(trailer,y.youtubeChannels[0]).length,0);
+assert.equal(y.videoFilm(details(0),ids[0]).audioLanguage,'ar');
+const spoof=details(0);spoof.videoDetails.channelId='unapproved';assert.throws(()=>y.videoFilm(spoof,ids[0]));
+const blocked=details(0);blocked.playabilityStatus.playableInEmbed=false;assert.throws(()=>y.videoFilm(blocked,ids[0]));
+const partial=details(0);partial.videoDetails.title='History part 2';assert.throws(()=>y.videoFilm(partial,ids[0]));
+assert.deepEqual(y.pageJson('var ytInitialData = {"value":"} in a string"};','ytInitialData'),{value:'} in a string'});
+const calls=[];
+const fetcher=async input=>{const url=new URL(String(input));assert.equal(url.hostname,'www.youtube.com');calls.push(url.href);if(url.pathname.startsWith('/channel/')){const i=y.youtubeChannels.findIndex(c=>url.pathname.includes(c.id));return new Response('var ytInitialData = '+JSON.stringify(data(i))+';</script>');}const i=ids.indexOf(url.searchParams.get('v'));assert(i>=0);return new Response('var ytInitialPlayerResponse = '+JSON.stringify(details(i))+';</script>');};
+const now=Date.now();const [a,b]=await Promise.all([y.liveYouTube({fetcher,now}),y.liveYouTube({fetcher,now})]);
+assert.equal(a.status.mode,'live');assert.equal(a.films.length,34);assert.equal(b.films.length,34);assert.equal(calls.length,8,'Concurrent refreshes share work');
+assert(a.films.slice(0,4).every(f=>ids.includes(f.id)));assert(y.knownYouTube(ids[0]));
+await y.liveYouTube({fetcher,now:now+1000,refresh:true});assert.equal(calls.length,8,'Manual refresh obeys cooldown');
+const outage=await y.liveYouTube({fetcher:async()=>new Response('',{status:503}),now:now+31*60_000});assert.equal(outage.status.mode,'fallback');assert.equal(outage.films.length,34);assert(outage.status.channels.every(c=>c.status==='unavailable'));
+console.log('Live YouTube channel discovery, trusted publishers, embed validation, exclusions, deduplication, bounded refresh, cooldown and outage fallback passed.');

@@ -1,0 +1,3 @@
+import {apiJson} from '@/lib/api-response';
+import {resolveMedia,validProviderId} from '@/lib/catalog-service';
+export async function GET(request:Request){const q=new URL(request.url).searchParams,provider=q.get('provider')||'',id=q.get('id')||'';if(!(provider==='youtube'?/^[\w-]{11}$/.test(id):validProviderId(provider,id)))return apiJson({error:'Invalid media identifier'},{status:400});try{return apiJson(await resolveMedia(provider,id),{headers:{'Cache-Control':'public, max-age=300'}});}catch{return apiJson({error:'This film is unavailable from the provider.'},{status:404,headers:{'Cache-Control':'no-store'}});}}
