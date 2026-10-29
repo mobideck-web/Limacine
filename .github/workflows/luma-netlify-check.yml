@@ -1,0 +1,38 @@
+name: Validate Luma Netlify build
+on:
+  push:
+    branches:
+      - luma-sites-netlify-v8
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: luma-netlify
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build
+        run: npm run build
+      - name: Smoke test
+        run: |
+          npm start > /tmp/luma-next.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:3000/; then
+              curl --fail --silent --dump-header /tmp/luma-headers --output /dev/null http://127.0.0.1:3000/
+              grep -qi '^content-security-policy:' /tmp/luma-headers
+              grep -qi '^referrer-policy: no-referrer' /tmp/luma-headers
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/luma-next.log
+          exit 1
