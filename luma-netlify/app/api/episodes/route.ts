@@ -1,0 +1,5 @@
+export async function GET(request:Request){
+ const p=new URL(request.url).searchParams,title=p.get('title')?.trim().slice(0,120),imdb=p.get('imdb');if(!title)return Response.json({seasons:{}},{status:400});
+ try{const r=await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(title)}&embed=episodes`,{signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error();const show=await r.json() as {name?:string;externals?:{imdb?:string};_embedded?:{episodes?:{season:number;number:number;name:string}[]}};const normalize=(s:string)=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');if(imdb?show.externals?.imdb!==imdb:normalize(show.name||'')!==normalize(title))return Response.json({seasons:{}});const seasons:Record<string,{number:number;name:string}[]>={};for(const e of show._embedded?.episodes||[]){if(!Number.isSafeInteger(e.season)||!Number.isSafeInteger(e.number)||e.number<1)continue;(seasons[String(e.season)]||=[]).push({number:e.number,name:e.name});}return Response.json({seasons,source:'TVmaze'},{headers:{'Cache-Control':'private, max-age=3600'}});}
+ catch{return Response.json({seasons:{},manual:true});}
+}
