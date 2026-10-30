@@ -1,9 +1,9 @@
 import type {Film} from './types';
 export const players=[
-  {id:'framextv',name:'FrameXTV',origin:'https://framextv.cc',embedded:true},
-  {id:'cinesrc',name:'CineSrc',origin:'https://cinesrc.st',embedded:true},
-  {id:'vidly',name:'Vidly',origin:'https://vidly.pro',embedded:false},
-  {id:'vidsrc',name:'VidSrc',origin:'https://vidsrc.sh',embedded:false},
+  {id:'framextv',name:'FrameXTV',origin:'https://framextv.cc',embedded:true,protected:true},
+  {id:'cinesrc',name:'CineSrc',origin:'https://cinesrc.st',embedded:true,protected:true},
+  {id:'vidly',name:'Vidly',origin:'https://vidly.pro',embedded:true,protected:false},
+  {id:'vidsrc',name:'VidSrc',origin:'https://vidsrc.sh',embedded:true,protected:false},
 ] as const;
 export type PlayerId=typeof players[number]['id'];
 // FrameXTV currently uses .cc, while .xyz is also a documented provider origin.

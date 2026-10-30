@@ -1,6 +1,6 @@
 # Luma — Netlify deployment
 
-This directory contains the Luma — Your cinema application adapted from Sites version 8 for a Netlify Next.js deployment.
+This directory contains the Luma — Your cinema application adapted from Sites version 9 for a Netlify Next.js deployment.
 
 - Netlify base directory: `luma-netlify`
 - Build command: `npm run build`
